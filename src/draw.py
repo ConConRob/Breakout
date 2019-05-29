@@ -46,15 +46,20 @@ def main():
             left = True
         if keys[pygame.K_RIGHT]:
             right = True
+        
         for object in object_list:
+            handle_move = getattr(object, "handle_move", None)
+            if callable(handle_move):
+                handle_move(left, right)
             object.update()
             object.check_collision()
- 
+
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
- 
+        for paddle in object_list:
+            paddle.draw(screen, pygame)
         clock.tick(60)
         pygame.display.flip()
  

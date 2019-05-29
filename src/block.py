@@ -34,11 +34,14 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
-class Paddle(Block):
+class Paddle(KineticBlock):
     pass
-    def handle_move(self):
-        key = pygame.key.get_pressed()
-        if key[pygame.K_LEFT]:
+    def handle_move(self, is_left, is_right):
+        if is_left:
             self.rectangle.move_ip(-1,0)
-        if key[pygame.K_RIGHT]:
+            print(self.rectangle)
+
+        if is_right:
             self.rectangle.move_ip(1,0)
+            print(self.rectangle)
+       
