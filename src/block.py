@@ -34,6 +34,9 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class GameBlock(KineticBlock):
+    pass
+
 class Paddle(KineticBlock):
     pass
     def handle_move(self, is_left, is_right):
