@@ -52,7 +52,10 @@ class GameBlock(KineticBlock):
         if(self.hitPoints <= 0):
             # move off screen
             self.position.x = -1000
-            
+    def isAlive(self):
+        if self.hitPoints > 0:
+            return True
+        return False    
 class Paddle(KineticBlock):
     pass
     def handle_move(self, is_left, is_right):
@@ -60,10 +63,10 @@ class Paddle(KineticBlock):
         if is_left:
             self.rectangle.move_ip(-1 * speed,0)
             self.position.x -= speed
-            print(self.rectangle)
+            
 
         if is_right:
             self.rectangle.move_ip(speed,0)
             self.position.x += speed
-            print(self.rectangle)
+           
        

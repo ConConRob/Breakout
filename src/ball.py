@@ -148,7 +148,8 @@ class GameBall(Ball):
                 Vector2(object.position.x - object.rectangle.width/2, object.position.y + object.rectangle.height/2),
                 Vector2(object.position.x + object.rectangle.width/2, object.position.y + object.rectangle.height/2)
             ]
-
+            if  hasattr(object, 'hit'):
+                object.hit()
             for corner in corners:
                 relative_vector = self.position - corner
                 if relative_vector.length() <= self.radius:

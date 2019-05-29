@@ -18,12 +18,12 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
     # make all the game blocks
-
-    for i in range(1,21):
+    numBlocksRow= 2
+    numRows= 1
+    for i in range(1, numBlocksRow * numRows +1):
         margin = 5
         blockHeight = 50
-        numBlocksRow= 5
-        blockWidth = (SCREEN_SIZE[0] - 5*margin)/numBlocksRow
+        blockWidth = (SCREEN_SIZE[0] - numBlocksRow*margin)/numBlocksRow
         row =  math.ceil(i/numBlocksRow)
         xPos = ( (blockWidth + margin) * i) - (blockWidth + margin)/2 - (row -1)*SCREEN_SIZE[0]
         yPos = row*blockHeight +margin*row 
@@ -58,12 +58,26 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         
+        # see if all the game blocks are gone
+        # changes to true if a block is still here 
+        stillPlaying = False
+
         for object in object_list:
             handle_move = getattr(object, "handle_move", None)
             if callable(handle_move):
                 handle_move(left, right)
             object.update()
             object.check_collision()
+            if getattr(object, 'isAlive', None):
+                if object.isAlive():
+                    stillPlaying = True
+
+
+                    
+        # check if any game blocks left
+        if stillPlaying == False:
+            print('YOU WON')
+            break
 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
