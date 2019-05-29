@@ -18,7 +18,10 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
-  
+
+    paddle = Paddle(Vector2(100, 750), 100, 50, [0, 0, 255])
+    object_list.append(paddle)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
