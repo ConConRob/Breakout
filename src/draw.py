@@ -13,13 +13,13 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                    Vector2( 175, 700),
                                     Vector2(10*random.random() - 2, 10*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
     # make all the game blocks
-    numBlocksRow= 2
-    numRows= 1
+    numBlocksRow= 10
+    numRows= 4
     for i in range(1, numBlocksRow * numRows +1):
         margin = 5
         blockHeight = 50
@@ -30,7 +30,7 @@ def debug_create_objects(object_list):
         gameBlock = GameBlock(Vector2(xPos,yPos),blockWidth, blockHeight, [0, 200, 200], 3)
         object_list.append(gameBlock)
 
-    paddle = Paddle(Vector2(100, 750), 100, 50, [0, 0, 255])
+    paddle = Paddle(Vector2(200, 750), 100, 50, [0, 0, 255])
     object_list.append(paddle)
 
 def main():
