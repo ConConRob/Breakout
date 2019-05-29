@@ -39,9 +39,11 @@ class Paddle(KineticBlock):
     def handle_move(self, is_left, is_right):
         if is_left:
             self.rectangle.move_ip(-1,0)
+            self.position.x -= 1
             print(self.rectangle)
 
         if is_right:
             self.rectangle.move_ip(1,0)
+            self.position.x += 1
             print(self.rectangle)
        
