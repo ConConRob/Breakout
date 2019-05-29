@@ -43,15 +43,16 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
- 
-    while True: # TODO:  Create more elegant condition for loop
+    
+    gameDone = True
+    while gameDone: # TODO:  Create more elegant condition for loop
         left = False
         right = False
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
-        #TODO:  Feed input variables into update for objects that need it.
+        #Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             left = True
@@ -71,17 +72,21 @@ def main():
             if getattr(object, 'isAlive', None):
                 if object.isAlive():
                     stillPlaying = True
-
+            
 
                     
         # check if any game blocks left
         if stillPlaying == False:
             print('YOU WON')
-            break
-
+            gameDone = False
+        
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
+            # check if ball is dead
+            if getattr(ball, 'dead', None) and ball.dead == True:
+                print('You Lose')
+                gameDone = False
             ball.draw(screen, pygame)
         for paddle in object_list:
             paddle.draw(screen, pygame)
