@@ -35,18 +35,35 @@ class KineticBlock(Block):
     pass
 
 class GameBlock(KineticBlock):
-    pass
-
+    def __init__(self, position, width, height, color, hitPoints):
+        super().__init__( position, width, height, color)
+        self.hitPoints = hitPoints
+        self.startHitPoints = hitPoints
+    
+    def draw(self, screen, pygame):
+        if self.hitPoints > 0:
+            pygame.draw.rect(screen, self.color, self.rectangle)
+    
+    def hit(self):
+        self.hitPoints -= 1
+        # reduce color
+        for i, colorNum in enumerate(self.color):
+            self.color[i] = colorNum*self.hitPoints/self.startHitPoints  
+        if(self.hitPoints <= 0):
+            # move off screen
+            self.position.x = -1000
+            
 class Paddle(KineticBlock):
     pass
     def handle_move(self, is_left, is_right):
+        speed = 8
         if is_left:
-            self.rectangle.move_ip(-1,0)
-            self.position.x -= 1
+            self.rectangle.move_ip(-1 * speed,0)
+            self.position.x -= speed
             print(self.rectangle)
 
         if is_right:
-            self.rectangle.move_ip(1,0)
-            self.position.x += 1
+            self.rectangle.move_ip(speed,0)
+            self.position.x += speed
             print(self.rectangle)
        
